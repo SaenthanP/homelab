@@ -4,15 +4,17 @@ metadata:
   name: whoami
   namespace: argocd
 spec:
-  project: default
+  project: homelab
   source:
     repoURL: https://github.com/SaenthanP/homelab
     targetRevision: HEAD
     path: services/whoami
   destination:
     server: https://kubernetes.default.svc
-    namespace: default
+    namespace: whoami
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
