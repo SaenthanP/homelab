@@ -10,12 +10,12 @@ spec:
     chart: ingress-nginx
     targetRevision: 4.10.0
     helm:
-      values: |
+      valuesObject:
         controller:
-          service:
-            type: NodePort
           extraArgs:
             enable-ssl-passthrough: ""
+          service:
+            type: LoadBalancer
   destination:
     server: https://kubernetes.default.svc
     namespace: ingress-nginx
