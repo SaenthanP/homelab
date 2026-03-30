@@ -37,9 +37,9 @@ spec:
   ingressClassName: traefik
   tls:
     - hosts:
-        - vault.homelab.taild3b4b8.ts.net
+        - homelab.taild3b4b8.ts.net
   rules:
-    - host: vault.homelab.taild3b4b8.ts.net
+    - host: homelab.taild3b4b8.ts.net
       http:
         paths:
           - path: /  # Specific path for Vault
