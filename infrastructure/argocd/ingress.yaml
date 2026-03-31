@@ -37,9 +37,9 @@ spec:
   ingressClassName: traefik
   tls:
     - hosts:
-        - vault.taild3b4b8.ts.net
+        - vault.saenthan.com
   rules:
-    - host: vault.taild3b4b8.ts.net
+    - host: vault.saenthan.com
       http:
         paths:
           - path: /  # Specific path for Vault
