@@ -1,25 +1,51 @@
 # Argo CD Ingress
-rules:
-  - host: homelab.taild3b4b8.ts.net
-    http:
-      paths:
-        - path: /argo
-          pathType: Prefix
-          backend:
-            service:
-              name: argocd-server
-              port:
-                number: 80
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argocd-ingress
+  namespace: argocd
+  annotations:
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - argocd.saenthan.com
+  rules:
+    - host: argocd.saenthan.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: argocd-server
+                port:
+                  number: 80
 ---
 # Vault Ingress
-rules:
-  - host: homelab.taild3b4b8.ts.net
-    http:
-      paths:
-        - path: /vault
-          pathType: Prefix
-          backend:
-            service:
-              name: vault
-              port:
-                number: 8200
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: vault-ingress
+  namespace: vault
+  annotations:
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - vault.taild3b4b8.ts.net
+  rules:
+    - host: vault.taild3b4b8.ts.net
+      http:
+        paths:
+          - path: /  # Specific path for Vault
+            pathType: Prefix
+            backend:
+              service:
+                name: vault
+                port:
+                  number: 8200
