@@ -7,11 +7,13 @@ metadata:
   annotations:
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   ingressClassName: traefik
   tls:
     - hosts:
         - argocd.saenthan.com
+      secretName: argocd-tls
   rules:
     - host: argocd.saenthan.com
       http:
